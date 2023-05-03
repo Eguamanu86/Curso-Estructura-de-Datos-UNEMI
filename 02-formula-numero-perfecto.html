@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 primeros numeros perfectos</title>
+</head>
+
+<body>
+    <p>A parte de eso, un matemático muy conocido llamado Euler, formulo una ecuación en donde se podían encontrar los 4
+        primeros números perfecto a partir de números primos.</p>
+    <p>Números perfectos Donde n es un número primo <br>Así que los primeros 4 números se hallarían así:</p>
+    <p>Formula</p>
+    <li>n = 2: 2^1 × (2^2 – 1) = 6</li>
+    <li>n = 3: 2^2 × (2^3 – 1) = 28</li>
+    <li>n = 5: 2^4 × (2^5 – 1) = 496</li>
+    <li>n = 7: 2^6 × (2^7 – 1) = 8.128</li>
+
+    <h4>Resultado del Algoritmo:</h4>
+
+    <script>
+        let contar_primos = 0
+        const LIMITE_NUMEROS = 4
+
+        for (let contador = 2; contar_primos < LIMITE_NUMEROS; contador++) {
+            let esPrimo = fnEsPrimo(contador)
+            if (esPrimo) {
+                const exp1 = 2 ** (contador - 1)
+                const exp2 = (2 ** contador) - 1
+                const numeroPerfecto = exp1 * exp2
+                document.write(`n = ${contador}: 2^${contador - 1} × (2^${contador} – 1) = ${numeroPerfecto}`, '<br>')
+                contar_primos++
+            }
+        }
+
+        function fnEsPrimo(numero) {
+            let contador = 2
+            while (contador < numero) {
+                if (numero % contador === 0) {
+                    return false
+                }
+                contador++
+            }
+            return true
+        }
+
+    </script>
+
+</body>
+
+</html>

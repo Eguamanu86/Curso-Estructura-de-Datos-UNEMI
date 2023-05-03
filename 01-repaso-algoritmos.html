@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3">Verificar si es número Primo o Perfecto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ingrese Numero:</td>
+                <td colspan="2"><input type="number" id="id-txt-numero"></td>
+            </tr>
+            <tr>
+                <td>Respuesta:</td>
+                <td colspan="2"><input type="text" id="id-txt-respuesta" readonly></td>
+            </tr>
+            <tr>
+                <td><button id="btn-validar-primo">Validar si es Primo</button></td>
+                <td><button id="btn-validar-perfecto">Validar si es Perfecto</button></td>
+                <td><button id="btn-calcular-factorial">Calcular Factorial</button></td>
+            </tr>
+            <tr>
+                <td><button id="btn-validar-palindromo">Validar Palindromo</button></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const txtNumero = document.getElementById("id-txt-numero")
+        const txtRespuesta = document.getElementById("id-txt-respuesta")
+
+        const btnValidarPrimo = document.getElementById("btn-validar-primo")
+        const btnValidarPerfecto = document.getElementById("btn-validar-perfecto")
+        const btnCalcularFactorial = document.getElementById("btn-calcular-factorial")
+        const btnValidarPalindromo = document.getElementById("btn-validar-palindromo")
+
+        // Los números primos son aquellos que solo son divisibles entre ellos mismos y el 1,
+        // es decir, que si intentamos dividirlos por cualquier otro número, el resultado no es entero
+
+        btnValidarPrimo.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = ''
+            const numero = parseInt(txtNumero.value)
+            if (isNaN(numero)) {
+                alert('Ingrese el valor de N')
+                return
+            }
+            const esPrimo = fnEsPrimo(numero)
+            if (esPrimo) {
+                txtRespuesta.value = 'es Primo'
+            } else {
+                txtRespuesta.value = 'No es Primo'
+            }
+        })
+
+        function fnEsPrimo(numero) {
+            let contador = 2
+            while (contador < numero) {
+                if (numero % contador === 0) {
+                    return false
+                }
+                contador++
+            }
+            return true
+        }
+
+
+
+        // Los números perfectos son aquellos iguales a la suma de sus divisores:
+        // 6 se puede dividir por 1, 2 y 3, y cuando sumas esos números, el resultado es 6
+        btnValidarPerfecto.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = ''
+            const numero = parseInt(txtNumero.value)
+            if (isNaN(numero)) {
+                alert('Ingrese el valor de N')
+                return
+            }
+            const esPerfecto = fnEsPerfecto(numero)
+            if (esPerfecto) {
+                txtRespuesta.value = 'es Perfecto'
+            } else {
+                txtRespuesta.value = 'No es Perfecto'
+            }
+        })
+
+        function fnEsPerfecto(numero) {
+            let contador = 1
+            let acumulador = 0
+            while (contador < numero) {
+                if (numero % contador === 0) {
+                    acumulador = acumulador + contador
+                }
+                contador++
+            }
+            if (acumulador === numero) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        btnCalcularFactorial.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = ''
+            const numero = parseInt(txtNumero.value)
+            if (isNaN(numero)) {
+                alert('Ingrese el valor de N')
+                return
+            }
+            txtRespuesta.value = fnCalcularFactorialCreciente(numero)
+            //txtRespuesta.value = fnCalcularFactorialDecreciente(numero)
+        })
+
+        function fnCalcularFactorialCreciente(numero) {
+            let acumulador = 1
+            for (let i = 1; i <= numero; i++) {
+                acumulador = acumulador * i
+            }
+            return acumulador
+        }
+
+        function fnCalcularFactorialDecreciente(numero) {
+            let acumulador = 1
+            while (numero) {
+                acumulador = acumulador * numero
+                numero--
+            }
+            return acumulador
+        }
+
+
+        btnValidarPalindromo.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = ''
+            const numero = parseInt(txtNumero.value)
+            if (isNaN(numero)) {
+                alert('Ingrese el valor de N')
+                return
+            }
+            if (numero < 10) {
+                alert('Ingrese el valor de numerico mayor a >= 10')
+                return
+            }
+            if (fnEsPalindromo(numero)) {
+                txtRespuesta.value = 'es Palindromo'
+            } else {
+                txtRespuesta.value = 'No es Palindromo'
+            }
+
+        })
+
+        function fnEsPalindromo(numero) {
+            let numCopia = numero
+            let invertido = 0
+            while (numCopia) {
+                residuo = numCopia % 10
+                numCopia = parseInt(numCopia / 10)
+                invertido = invertido * 10 + residuo
+            }
+            return invertido === numero
+        }
+
+    </script>
+</body>
+
+</html>

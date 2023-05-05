@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios con Vectores Numericos</title>
+    <style>
+        table td {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h4>Ejercicio con Vectores</h4>
+    <p></p>
+    <table id="id-table-vector-numerico" border="1" cellspacing="1" cellpadding="1">
+        <thead>
+            <tr>
+                <td colspan="10">Vector numerico de 10 elementos</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><button id="btn-cargar-vector">Cargar Vector</button></td>
+                <td colspan="5"><button id="btn-vaciar-vector">Vaciar Vector</button></td>
+            </tr>
+            <tr>
+                <td colspan="5"><button id="btn-valor-minimo">Valor Minimo</button></td>
+                <td colspan="5"><button id="btn-valor-maximo">Valor Maximo</button></td>
+            </tr>
+            <tr>
+                <td colspan="5"><button id="btn-sumar-valores">Suma de Valores</button></td>
+                <td colspan="5"><button id="btn-producto-vector">Producto de Valores</button></td>
+            </tr>
+            <tr>
+                <td colspan="5"><button id="btn-calcular-moda">Calcular Moda</button></td>
+                <td colspan="5"><button id="btn-calcular-media">Calcular Media</button></td>
+            </tr>
+            <tr>
+                <td colspan="5"><button id="btn-calcular-mediana">Calcular Mediana</button></td>
+                <td colspan="5"><button id="btn-calcular-otro">...</button></td>
+            </tr>
+        </tfoot>
+    </table>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <td colspan="2">Calculos con vectores </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Resultado:</td>
+                <td colspan="2"><input type="text" id="id-txt-respuesta" readonly></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let vector = []
+        const TOPE = 10
+        const NUM_MAXIMO_RANDOM = 20
+
+        const tableTbody = document.querySelector('#id-table-vector-numerico > tbody')
+        const btnCargarVector = document.getElementById("btn-cargar-vector")
+        const btnVaciarVector = document.getElementById("btn-vaciar-vector")
+        const btnSumarValores = document.getElementById("btn-sumar-valores")
+        const btnproductoValores = document.getElementById("btn-producto-vector")
+        const txtRespuesta = document.getElementById("id-txt-respuesta")
+
+
+        btnCargarVector.addEventListener('click', (event) => {
+            event.preventDefault()
+            fnCargarVector()
+            fnPresentarVector()
+        })
+
+        btnVaciarVector.addEventListener('click', (event) => {
+            event.preventDefault()
+            fnVaciarVector()
+            fnPresentarVector()
+        })
+        btnproductoValores.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = fnProductoVectores()
+        })
+
+        function fnCargarVector() {
+            for (let x = 0; x < TOPE; x++) {
+                const numero = Math.ceil(Math.random() * NUM_MAXIMO_RANDOM);
+                vector[x] = numero
+            }
+        }
+
+        function fnVaciarVector() {
+            vector = []
+        }
+
+        function fnPresentarVector() {
+            let contador = 0
+            let str = ''
+            while (contador < 2) {
+                str = str + `<tr>`
+                for (let x = 0; x < TOPE; x++) {
+                    if (contador === 0) {
+                        str = str + `<td>${x}</td>`
+                    } else {
+                        str = str + `<td bgcolor="#00FF00">${vector[x] || '-'}</td>`
+                    }
+                }
+                str = str + `</tr>`
+                contador++
+            }
+            tableTbody.innerHTML = str
+        }
+
+        btnSumarValores.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = fnSumarValores()
+        })
+
+        function fnSumarValores() {
+            let suma = 0
+            for (let i = 0; i < TOPE; i++) {
+                suma = suma + vector[i]
+            }
+            return suma
+        }
+
+        function fnProductoVectores() {
+            let producto = 1
+            for (let i = 0; i < TOPE; i++) {
+                producto = producto * vector[i]
+            }
+            return producto
+        }
+    </script>
+</body>
+
+</html>

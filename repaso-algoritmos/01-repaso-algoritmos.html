@@ -31,13 +31,14 @@
             </tr>
             <tr>
                 <td><button id="btn-validar-palindromo">Validar Palindromo</button></td>
-                <td></td>
+                <td><button id="btn-convertir-binario">Convertir a Binario</button></td>
                 <td></td>
             </tr>
         </tbody>
     </table>
 
     <script>
+
         const txtNumero = document.getElementById("id-txt-numero")
         const txtRespuesta = document.getElementById("id-txt-respuesta")
 
@@ -45,6 +46,7 @@
         const btnValidarPerfecto = document.getElementById("btn-validar-perfecto")
         const btnCalcularFactorial = document.getElementById("btn-calcular-factorial")
         const btnValidarPalindromo = document.getElementById("btn-validar-palindromo")
+        const btnConvertirBinario = document.getElementById("btn-convertir-binario")
 
         // Los números primos son aquellos que solo son divisibles entre ellos mismos y el 1,
         // es decir, que si intentamos dividirlos por cualquier otro número, el resultado no es entero
@@ -171,6 +173,29 @@
                 invertido = invertido * 10 + residuo
             }
             return invertido === numero
+        }
+
+
+        btnConvertirBinario.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = ''
+            const numero = parseInt(txtNumero.value)
+            if (isNaN(numero)) {
+                alert('Ingrese el valor de N')
+                return
+            }
+            txtRespuesta.value = fnConvertToBinary(numero)
+        })
+
+
+        function fnConvertToBinary(number) {
+            let num = number;
+            let binary = (num % 2).toString();
+            for (; num > 1;) {
+                num = parseInt(num / 2);
+                binary = (num % 2) + (binary);
+            }
+            return binary
         }
 
     </script>

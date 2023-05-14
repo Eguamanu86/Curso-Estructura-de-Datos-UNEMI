@@ -10,7 +10,6 @@
         table td {
             text-align: center;
         }
-
     </style>
 </head>
 
@@ -90,13 +89,18 @@
     <script>
         let vector = []
         const TOPE = 10
-        const NUM_MAXIMO_RANDOM = 20
+        const NUM_MAXIMO_RANDOM = 50
 
         const tableTbody = document.querySelector('#id-table-vector-numerico > tbody')
         const btnCargarVector = document.getElementById("btn-cargar-vector")
         const btnVaciarVector = document.getElementById("btn-vaciar-vector")
         const btnSumarValores = document.getElementById("btn-sumar-valores")
         const btnproductoValores = document.getElementById("btn-producto-vector")
+        const btnValorMinimo = document.getElementById("btn-valor-minimo")
+        const btnValorMaximo = document.getElementById("btn-valor-maximo")
+        const btnCalcularMedia = document.getElementById("btn-calcular-media")
+        const btnCalcularModa = document.getElementById("btn-calcular-moda")
+
         const txtRespuesta = document.getElementById("id-txt-respuesta")
 
 
@@ -165,6 +169,93 @@
             }
             return producto
         }
+
+        /// Calcular valor minimo del array
+        btnValorMinimo.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = fnValorMinimo()
+        })
+
+        btnValorMaximo.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = fnValorMaximo()
+        })
+
+        function fnValorMinimo() {
+            let minimo = vector[0]
+
+            for (let i in vector) {
+                if (vector[i] < minimo) {
+                    minimo = vector[i]
+                }
+            }
+            return minimo
+        }
+        function fnValorMaximo() {
+            let maximo = vector[0]
+
+            for (let i in vector) {
+                if (vector[i] > maximo) {
+                    maximo = vector[i]
+                }
+            }
+            return maximo
+        }
+
+        btnCalcularMedia.addEventListener('click', (event) => {
+            event.preventDefault()
+            txtRespuesta.value = fnCalcularMedia()
+        })
+
+        function fnCalcularMedia() {
+            const sum = fnSumarValores()
+            const promedio = sum / TOPE
+            return promedio
+        }
+
+
+        ///
+        // Calcular Moda en un Array de numeros
+
+        btnCalcularModa.addEventListener('click', (event) => {
+            event.preventDefault()
+            let copiaVector = [...vector]
+            txtRespuesta.value = fnCalcularModa(copiaVector)
+        })
+
+        function fnCalcularModa(copiaVector) {
+            let frecuencias = []
+            for (let i in copiaVector) {
+                const numero = copiaVector[i]
+                frecuencias[i] = calcularFrecuencia(numero, copiaVector)
+            }
+            const posicionModa = obtenerPosicionFrecuenciaMayor(frecuencias)
+            const moda = copiaVector[posicionModa]
+            return moda
+        }
+
+        function calcularFrecuencia(numero, copiaVector) {
+            let numVeces = 0
+            for (let i in copiaVector) {
+                if (copiaVector[i] === numero) {
+                    numVeces++
+                }
+            }
+            return numVeces
+        }
+
+        function obtenerPosicionFrecuenciaMayor(frecuencias) {
+            let posMayor = 0
+            let numMayor = frecuencias[0]
+            for (let i in frecuencias) {
+                if (frecuencias[i] > numMayor) {
+                    numMayor = frecuencias[i]
+                    posMayor = i
+                }
+            }
+            return posMayor
+        }
+
     </script>
 </body>
 

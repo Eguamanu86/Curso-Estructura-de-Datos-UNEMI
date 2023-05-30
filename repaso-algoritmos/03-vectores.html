@@ -16,20 +16,34 @@
 <body>
     <h4>Ejercicio con Vectores</h4>
     <div>
-        Dimension del arreglo:
-        <select id="select-dimension-arreglo">
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="30">30</option>
-        </select>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Dimension del arreglo:</td>
+                    <td>
+                        <select id="select-dimension-arreglo">
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ingrese valor a buscar:</td>
+                    <td><input type="text" name="" id="id-valor-busqueda" maxlength="4" size="5"></td>
+                </tr>
+            </tbody>
+        </table>
+
+
     </div>
     <br>
     <table id="id-table-vector-numerico" border="1" cellspacing="1" cellpadding="1">
@@ -95,6 +109,11 @@
                 <td colspan="5"><button id="btn-ordenar-asc-burbuja">Ordenar ASC Método Burbuja</button></td>
                 <td colspan="5"><button id="btn-ordenar-desc-seleccion">Ordenar DESC Método Burbuja</button></td>
             </tr>
+
+            <tr>
+                <td colspan="5"><button id="btn-buscar-metodo-secuencial">Buscar por método Secuencial</button></td>
+                <td colspan="5"><button id="btn-buscar-metodo-binario">Buscar por método Binario</button></td>
+            </tr>
         </tfoot>
     </table>
     <hr>
@@ -107,7 +126,7 @@
         <tbody>
             <tr>
                 <td>Resultado:</td>
-                <td colspan="2"><input type="text" id="id-txt-respuesta"></td>
+                <td colspan="2"><input type="text" id="id-txt-respuesta" size="70"></td>
             </tr>
         </tbody>
     </table>
@@ -130,6 +149,10 @@
         const btnordenarasSeleccion = document.getElementById("btn-ordenar-asc-seleccion")
         const txtRespuesta = document.getElementById("id-txt-respuesta")
 
+        const txtValorBuscar = document.getElementById("id-valor-busqueda")
+        const btnBuscarPorMetodoSecuencial = document.getElementById("btn-buscar-metodo-secuencial")
+        const btnBuscarPorMetodoBinario = document.getElementById("btn-buscar-metodo-binario")
+
         const selectDimension = document.getElementById("select-dimension-arreglo")
         let TOPE = parseInt(selectDimension.options[selectDimension.selectedIndex].value)
 
@@ -144,9 +167,9 @@
             // console.log(selectDimension.options[selectDimension.selectedIndex].text);
         })
 
+
         btnCargarVector.addEventListener('click', (event) => {
             event.preventDefault()
-            fnVaciarVector()
             fnCargarVector()
             fnPresentarVector()
         })
@@ -298,6 +321,7 @@
             txtRespuesta.value = media.toFixed(2)
         })
 
+        ///////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
         /// Calcular Mediana en un Array de numeros
@@ -328,11 +352,11 @@
 
         function ordenarAscBurbuja() {
             for (let i = 0; i < vector.length - 1; i++) {
-                for (let j = 0; j < vector.length - i - 1; j++) {
-                    if (vector[j] > vector[j + 1]) {
-                        let auxiliar = vector[j];
-                        vector[j] = vector[j + 1];
-                        vector[j + 1] = auxiliar
+                for (let j = i + 1; j < vector.length; j++) {
+                    if (vector[i] > vector[j]) {
+                        let auxiliar = vector[i];
+                        vector[i] = vector[j];
+                        vector[j] = auxiliar
                     }
                 }
             }
@@ -359,6 +383,75 @@
                 vector[p] = vector[i]
                 vector[i] = minimo
             }
+        }
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        /// Busqueda por metodo secuencial
+
+        btnBuscarPorMetodoSecuencial.addEventListener('click', (event) => {
+            event.preventDefault()
+            const numero = txtValorBuscar.value
+            const indexValue = fnBuscarPorMetodoSecuencial(numero)
+            if (indexValue !== -1) {
+                txtRespuesta.value = `El Valor ${numero} esta la posicion index[${indexValue}]`
+            } else {
+                txtRespuesta.value = `Valor no encontrado.`
+            }
+        })
+
+        function fnBuscarPorMetodoSecuencial(numero) {
+            for (let i in vector) {
+                if (numero == vector[i]) {
+                    return i
+                }
+            }
+            return -1
+        }
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        /// Busqueda por metodo Binario
+
+        btnBuscarPorMetodoBinario.addEventListener('click', (event) => {
+            event.preventDefault()
+            const numero = txtValorBuscar.value
+            vector.sort((a, b) => a - b)
+            fnPresentarVector()
+
+            const indexValue = fnBuscarPorMetodoBinario(numero)
+            if (indexValue !== -1) {
+                txtRespuesta.value = `El Valor ${numero} esta la posicion index[${indexValue}]`
+            } else {
+                txtRespuesta.value = `Valor no encontrado.`
+            }
+
+        })
+
+        function fnBuscarPorMetodoBinario(numero) {
+
+            let indiceInferior = 0
+            let indiceSuperior = vector.length - 1
+
+            while (indiceInferior <= indiceSuperior) {
+
+                let indiceMedio = Math.floor((indiceInferior + indiceSuperior) / 2)
+                const valorPreguntar = vector[indiceMedio]
+
+                if (valorPreguntar == numero) {
+                    return indiceMedio
+                }
+
+                if (valorPreguntar > numero) {
+                    indiceSuperior = indiceMedio - 1
+                } else {
+                    indiceInferior = indiceMedio + 1
+                }
+
+            }
+            return -1
         }
 
     </script>

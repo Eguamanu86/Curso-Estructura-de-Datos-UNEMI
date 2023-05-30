@@ -31,6 +31,9 @@
             <option value="30">30</option>
         </select>
     </div>
+    Ingrese valor a buscar:
+    <input type="text" id="txt-valor-buscar">
+    <br>
     <br>
     <table id="id-table-vector-numerico" border="1" cellspacing="1" cellpadding="1">
         <thead>
@@ -70,30 +73,8 @@
                 <td colspan="5"><button id="btn-vaciar-vector">Vaciar Vector</button></td>
             </tr>
             <tr>
-                <td colspan="5"><button id="btn-valor-minimo">Valor Minimo</button></td>
-                <td colspan="5"><button id="btn-valor-maximo">Valor Maximo</button></td>
-            </tr>
-            <tr>
-                <td colspan="5"><button id="btn-sumar-valores">Suma de Valores</button></td>
-                <td colspan="5"><button id="btn-producto-vector">Producto de Valores</button></td>
-            </tr>
-            <tr>
-                <td colspan="5"><button id="btn-calcular-moda">Calcular Moda</button></td>
-                <td colspan="5"><button id="btn-calcular-media">Calcular Media</button></td>
-            </tr>
-            <tr>
-                <td colspan="5"><button id="btn-calcular-mediana">Calcular Mediana</button></td>
-                <td colspan="5"> </td>
-            </tr>
-
-            <tr>
-                <td colspan="5"><button id="btn-ordenar-asc-seleccion">Ordenar ASC Método Selección</button></td>
-                <td colspan="5"><button id="btn-ordenar-desc-seleccion">Ordenar DESC Método Selección</button></td>
-            </tr>
-
-            <tr>
-                <td colspan="5"><button id="btn-ordenar-asc-burbuja">Ordenar ASC Método Burbuja</button></td>
-                <td colspan="5"><button id="btn-ordenar-desc-seleccion">Ordenar DESC Método Burbuja</button></td>
+                <td colspan="5"><button id="btn-cargar-vector">Busqueda por Metodo Secuencial</button></td>
+                <td colspan="5"><button id="btn-vaciar-vector">Busqueda por Metodo Binario</button></td>
             </tr>
         </tfoot>
     </table>
@@ -107,7 +88,7 @@
         <tbody>
             <tr>
                 <td>Resultado:</td>
-                <td colspan="2"><input type="text" id="id-txt-respuesta"></td>
+                <td colspan="2"><input type="text" id="id-txt-respuesta" size="50"></td>
             </tr>
         </tbody>
     </table>
@@ -119,15 +100,7 @@
         const tableTbody = document.querySelector('#id-table-vector-numerico > tbody')
         const btnCargarVector = document.getElementById("btn-cargar-vector")
         const btnVaciarVector = document.getElementById("btn-vaciar-vector")
-        const btnValorMinimo = document.getElementById("btn-valor-minimo")
-        const btnValorMaximo = document.getElementById("btn-valor-maximo")
-        const btnSumarValores = document.getElementById("btn-sumar-valores")
-        const btnProductoValores = document.getElementById("btn-producto-vector")
-        const btnCalcularModa = document.getElementById("btn-calcular-moda")
-        const btnCalcularMedia = document.getElementById("btn-calcular-media")
-        const btnCalcularMediana = document.getElementById("btn-calcular-mediana")
-        const btnordenarascburbuja = document.getElementById("btn-ordenar-asc-burbuja")
-        const btnordenarasSeleccion = document.getElementById("btn-ordenar-asc-seleccion")
+
         const txtRespuesta = document.getElementById("id-txt-respuesta")
 
         const selectDimension = document.getElementById("select-dimension-arreglo")
@@ -157,11 +130,6 @@
             fnPresentarVector()
         })
 
-        btnProductoValores.addEventListener('click', (event) => {
-            event.preventDefault()
-            txtRespuesta.value = fnProductoVectores()
-        })
-
         function fnCargarVector() {
             for (let x = 0; x < TOPE; x++) {
                 const numero = Math.ceil(Math.random() * NUM_MAXIMO_RANDOM);
@@ -189,176 +157,6 @@
                 contador++
             }
             tableTbody.innerHTML = str
-        }
-
-        btnSumarValores.addEventListener('click', (event) => {
-            event.preventDefault()
-            txtRespuesta.value = fnSumarValores()
-        })
-
-        function fnSumarValores() {
-            let suma = 0
-            for (let i = 0; i < TOPE; i++) {
-                suma = suma + vector[i]
-            }
-            return suma
-        }
-
-        function fnProductoVectores() {
-            let producto = 1
-            for (let i = 0; i < TOPE; i++) {
-                producto = producto * vector[i]
-            }
-            return producto
-        }
-
-        /// Calcular Valores Maximo y Minomo
-        btnValorMaximo.addEventListener('click', (event) => {
-            event.preventDefault()
-            let copiaVector = [...vector]
-            txtRespuesta.value = fnBuscarNumeroMayor(copiaVector)
-        })
-
-        btnValorMinimo.addEventListener('click', (event) => {
-            event.preventDefault()
-            let copiaVector = [...vector]
-            txtRespuesta.value = fnBuscarNumeroMenor(copiaVector)
-        })
-
-        // RETORNA VALOR MAXIMO
-        function fnBuscarNumeroMayor(copiaVector) {
-            let numeroMayor = copiaVector[0]
-            for (let i = 1; i < copiaVector.length; i++) {
-                if (copiaVector[i] > numeroMayor) {
-                    numeroMayor = copiaVector[i]
-                }
-            }
-            return numeroMayor
-        }
-
-        // RETORNA VALOR MINIMO
-        function fnBuscarNumeroMenor(copiaVector) {
-            let numeroMenor = copiaVector[0]
-            for (let i = 1; i < copiaVector.length; i++) {
-                if (copiaVector[i] < numeroMenor) {
-                    numeroMenor = copiaVector[i]
-                }
-            }
-            return numeroMenor
-        }
-
-        /////////////////////////////////////////////////////////////
-
-        // Calcular Moda en un Array de numeros
-        btnCalcularModa.addEventListener('click', (event) => {
-            event.preventDefault()
-            let copiaVector = [...vector]
-            txtRespuesta.value = fnCalcularModa(copiaVector)
-        })
-
-        function fnCalcularModa(copiaVector) {
-            let frecuencias = []
-            for (let i in copiaVector) {
-                const numero = copiaVector[i]
-                frecuencias[i] = calcularFrecuencia(numero, copiaVector)
-            }
-            const posicionModa = obtenerPosicionFrecuenciaMayor(frecuencias)
-            const moda = copiaVector[posicionModa]
-            return moda
-        }
-
-        function calcularFrecuencia(numero, copiaVector) {
-            let numVeces = 0
-            for (let i in copiaVector) {
-                if (copiaVector[i] === numero) {
-                    numVeces++
-                }
-            }
-            return numVeces
-        }
-
-        function obtenerPosicionFrecuenciaMayor(frecuencias) {
-            let posMayor = 0
-            let numMayor = frecuencias[0]
-            for (let i in frecuencias) {
-                if (frecuencias[i] > numMayor) {
-                    numMayor = frecuencias[i]
-                    posMayor = i
-                }
-            }
-            return posMayor
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        /// Calcular Media en un Array de numeros
-        btnCalcularMedia.addEventListener('click', (event) => {
-            event.preventDefault()
-            let suma = fnSumarValores()
-            let media = suma / TOPE
-            txtRespuesta.value = media.toFixed(2)
-        })
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        /// Calcular Mediana en un Array de numeros
-        btnCalcularMediana.addEventListener('click', (event) => {
-            event.preventDefault()
-            let copiaVector = [...vector]
-            copiaVector.sort((a, b) => a - b)
-            console.log(copiaVector)
-            const dimensiones = copiaVector.length
-
-            if (dimensiones % 2 === 0) {
-                let posicionCentral = dimensiones / 2
-                txtRespuesta.value = (copiaVector[posicionCentral - 1] + copiaVector[posicionCentral]) / 2
-            } else {
-                let posicionCentral = parseInt((dimensiones - 1) / 2)
-                txtRespuesta.value = copiaVector[posicionCentral]
-            }
-
-        })
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        /// Ordenamiento por metodo de Burbuja
-        btnordenarascburbuja.addEventListener('click', (event) => {
-            event.preventDefault()
-            ordenarAscBurbuja()
-            fnPresentarVector()
-        })
-
-        function ordenarAscBurbuja() {
-            for (let i = 0; i < vector.length - 1; i++) {
-                for (let j = 0; j < vector.length - i - 1; j++) {
-                    if (vector[j] > vector[j + 1]) {
-                        let auxiliar = vector[j];
-                        vector[j] = vector[j + 1];
-                        vector[j + 1] = auxiliar
-                    }
-                }
-            }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        /// Ordenamiento por metodo de Seleccion
-        btnordenarasSeleccion.addEventListener('click', (event) => {
-            event.preventDefault()
-            ordenarAscSeleccion()
-            fnPresentarVector()
-        })
-
-        function ordenarAscSeleccion() {
-            for (let i = 0; i < vector.length - 1; i++) {
-                let minimo = vector[i]
-                let p = i
-                for (let j = i + 1; j < vector.length; j++) {
-                    if (minimo > vector[j]) {
-                        minimo = vector[j]
-                        p = j
-                    }
-                }
-                vector[p] = vector[i]
-                vector[i] = minimo
-            }
         }
 
     </script>

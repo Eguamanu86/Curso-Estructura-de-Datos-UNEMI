@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios con Matrices Numericas</title>
+    <style>
+        table td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h4>Ejercicio con Matrices</h4>
+    <div>
+        Dimension de la Matriz:[Fil]
+        <select id="select-dimension-filas">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        x
+        [Col]
+        <select id="select-dimension-columnas">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </div>
+
+    <br>
+    <table id="id-table-matriz-numerico" border="1" cellspacing="1" cellpadding="1">
+        <thead>
+            <tr>
+                <td colspan="10">Matriz numerica de M x N elementos</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="10">No se ha cargado la matriz</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><button id="btn-cargar-matriz">Cargar Matriz</button></td>
+                <td colspan="5"><button id="btn-vaciar-matriz">Vaciar Matriz</button></td>
+            </tr>
+            <tr>
+                <td colspan="5"><button id="btn-ordenar-matriz-tradicional">Ordenar Matriz ASC (Tradicional)</button>
+                </td>
+                <td colspan="5"><button id="btn-ordenar-matriz-vector-temporal">Ordenar Matriz ASC (Vector
+                        Temp)</button></td>
+            </tr>
+        </tfoot>
+    </table>
+    <br>
+    <table id="id-table-matriz-resultado" border="1" cellspacing="1" cellpadding="1">
+        <thead>
+            <tr>
+                <td colspan="10">Resultado de Calculos con Matrices </td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><textarea name="" id="id-txt-respuesta" cols="30" rows="10"></textarea></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+        // ARREGLO BIDIMENSIONAL
+        let matriz = []
+        let matrizResultado = []
+
+        const NUM_MINIMO_RANDOM = -50
+        const NUM_MAXIMO_RANDOM = 100
+
+        // refrencia al cuerpo de la tabla: tbody
+        const tableTbody = document.querySelector('#id-table-matriz-numerico > tbody')
+        const tableTbodyResultado = document.querySelector('#id-table-matriz-resultado > tbody')
+
+        // agregamos las referencias a los botones del DOM
+        const btnCargarMatriz = document.getElementById("btn-cargar-matriz")
+        const btnVaciarMatriz = document.getElementById("btn-vaciar-matriz")
+
+        const btnOrdenarMatrizTradicional = document.getElementById("btn-ordenar-matriz-tradicional")
+        const btnOrdenarMatrizVectorTemp = document.getElementById("btn-ordenar-matriz-vector-temporal")
+
+        // referencia a la caja de texto: control textarea
+        const txtRespuesta = document.getElementById("id-txt-respuesta")
+
+        // agregamos referencia a los controles: listas deplegables (select)
+        const selectDimensionFilas = document.getElementById("select-dimension-filas")
+        const selectDimensionColumnas = document.getElementById("select-dimension-columnas")
+
+        // asigamos los valores por defecto que tienen las listas desplegables.
+        let FILAS = parseInt(selectDimensionFilas.options[selectDimensionFilas.selectedIndex].value)
+        let COLUMNAS = parseInt(selectDimensionColumnas.options[selectDimensionColumnas.selectedIndex].value)
+
+        // capturamos los eventos de los controles lista desplegables: Select
+        selectDimensionFilas.addEventListener('change', (event) => {
+            FILAS = parseInt(event.target.value)
+        })
+
+        selectDimensionColumnas.addEventListener('change', (event) => {
+            COLUMNAS = parseInt(event.target.value)
+        })
+
+        // evento del boton cargar matriz
+        btnCargarMatriz.addEventListener('click', (event) => {
+            event.preventDefault()
+            fnVaciarMatriz()
+            fnCargarMatriz()
+            fnPresentarMatriz()
+        })
+
+        // Procedimiento cargar numeros aleatorios en Matriz M x N
+        function fnCargarMatriz() {
+            for (let f = 0; f < FILAS; f++) {
+                matriz[f] = []
+                for (let c = 0; c < COLUMNAS; c++) {
+                    const numero = Math.floor(Math.random() * (NUM_MAXIMO_RANDOM - NUM_MINIMO_RANDOM)) + NUM_MINIMO_RANDOM;
+                    matriz[f][c] = numero
+                }
+            }
+        }
+
+        // evento del boton vaciar matriz
+        btnVaciarMatriz.addEventListener('click', (event) => {
+            event.preventDefault()
+            fnVaciarMatriz()
+            fnPresentarMatriz()
+        })
+
+        function fnVaciarMatriz() {
+            matriz = []
+        }
+
+        // procedimiento que genera cadena de etiquetas HTML(tr,td) para presentar en la pantalla GUI
+        function fnPresentarMatriz() {
+            let str = ''
+            for (let v of matriz) {
+                str += '<tr>'
+                str += v.map(e => `<td>${e}</td>`).join('')
+                str += '</tr>'
+            }
+            tableTbody.innerHTML = str
+            console.log(matriz)
+        }
+        // procedimiento que genera cadena de etiquetas HTML(tr,td) para presentar en la pantalla GUI
+        function fnPresentarMatrizResultado() {
+            let str = ''
+            for (let v of matrizResultado) {
+                str += '<tr>'
+                str += v.map(e => `<td>${e}</td>`).join('')
+                str += '</tr>'
+            }
+            tableTbodyResultado.innerHTML = str
+            console.log(matrizResultado)
+        }
+
+        // metodos de burbuja tradicional
+        btnOrdenarMatrizTradicional.addEventListener('click', (event) => {
+            event.preventDefault()
+            fnOrdenarMatrizMeotodoBurbuja()
+            fnPresentarMatrizResultado()
+        })
+
+        // ordenamiento de valores por metodos de burbuja,
+        // recorriendo todos los elementos de la matriz
+        function fnOrdenarMatrizMeotodoBurbuja() {
+            matrizResultado = [...matriz]
+            for (let m = 0; m < FILAS; m++) {
+
+                for (let n = 0; n < COLUMNAS; n++) {
+
+                    for (let f = 0; f < FILAS; f++) {
+
+                        for (let c = 0; c < COLUMNAS; c++) {
+
+                            if (matrizResultado[m][n] < matrizResultado[f][c]) {
+                                const temp = matrizResultado[m][n]
+                                matrizResultado[m][n] = matrizResultado[f][c]
+                                matrizResultado[f][c] = temp
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // metodos de burbuja con vector temporal unidimensional
+        btnOrdenarMatrizVectorTemp.addEventListener('click', (event) => {
+            event.preventDefault()
+            fnOrdenarMatrizMeotodoBurbujaConVectorAuxiliar()
+            fnPresentarMatrizResultado()
+        })
+
+        // ordenamiento de valores por metodos de burbuja,
+        // utilizando un vector temporal para ordenar y luego pasarlos a la matriz resultante
+        function fnOrdenarMatrizMeotodoBurbujaConVectorAuxiliar() {
+            let vectorUnidimensional = []
+            vectorUnidimensional = vectorUnidimensional.concat(...matriz)
+
+            vectorUnidimensional = ordenarVectorPorMetodoBurbuja(vectorUnidimensional)
+
+            for (let f = 0; f < FILAS; f++) {
+                matrizResultado[f] = vectorUnidimensional.splice(0, COLUMNAS)
+            }
+
+        }
+
+        //Metodo de burbuja para vectores unidimensional.
+        function ordenarVectorPorMetodoBurbuja(vector) {
+            for (let i = 0; i < vector.length - 1; i++) {
+                for (let j = i + 1; j < vector.length; j++) {
+                    if (vector[i] > vector[j]) {
+                        let auxiliar = vector[i];
+                        vector[i] = vector[j];
+                        vector[j] = auxiliar
+                    }
+                }
+            }
+            return vector
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+@startuml
+
+class Empresa{
+    ruc: string
+    nombres: string
+    razonSocial: string
+    direccion: string
+    telefono: string
+    correo: string
+}
+class Genero{
+    codigo: string
+    nombre: string
+}
+class Persona{
+    identificacion: string
+    nombres: string
+    apellidos: string
+    genero: Genero
+    fechaNacimiento: date
+    direccion: string
+    telefono: string
+    correo: string
+}
+class Empleado{
+    sueldoBase: number
+    horasTrabajadaSemana: number
+    fechaIngreso: date
+}
+class Cliente{
+    fechaIngreso: date
+    montoVenta: number
+    formaPago: FormaPago
+}
+
+class Directivo{
+    cargo: string
+}
+class FormaPago{
+    monto: number
+}
+
+class Efectivo{}
+class Debito{
+    fecha: date
+    vencimiento: date
+}
+class Credito{
+    fecha: date
+    vencimiento: date
+}
+class Cheque{}
+
+Persona <|-- Empleado
+Persona <|-- Cliente
+Empleado <|-- Directivo
+Empleado <-- Directivo
+
+Genero <-- Persona
+
+FormaPago <|-- Efectivo
+FormaPago <|-- Debito
+FormaPago <|-- Credito
+FormaPago <|-- Cheque
+
+FormaPago <-- Cliente
+
+Empresa *-- Empleado
+Empresa o-- Cliente
+
+@enduml

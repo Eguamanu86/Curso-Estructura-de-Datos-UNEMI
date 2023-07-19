@@ -37,12 +37,47 @@ class FondoInversion{
 class CarteraValor{
 
 }
+
+Class Valor{
+    nombreValor: string
+    numeroTitulo: string
+    precioCotizacion: number
+}
+
 class Ahorro{}
 class Corriente{}
-class TarjetaCredito{}
-class Sucursal{}
+
+
+class TarjetaCredito{
+    tipo: string
+    numero: string
+    titular: Cliente
+    fechaCaducidad: date
+}
+
+class Sucursal{
+    identificador: string
+    direccion: string
+}
 
 Persona <|-- Cliente
 Persona <|-- Empleado
+
+
+CuentaBancaria <|-- Ahorro
+CuentaBancaria <|-- Corriente
+
+
+Cliente "1" -- "1..*" CuentaBancaria
+Corriente  -- TarjetaCredito
+Corriente  -- FondoInversion
+Corriente  -- CarteraValor
+
+Empleado "1" -- "1" Sucursal
+CarteraValor --* Valor
+
+Banco --* CuentaBancaria
+Banco --o Cliente
+Banco --* Empleado
 
 @enduml

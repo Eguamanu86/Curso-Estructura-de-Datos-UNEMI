@@ -1,0 +1,48 @@
+@startuml
+class Banco{
+    ruc: string
+    razonSocial: string
+    nombre: string
+    direccion: string
+    correo: string
+}
+
+class Persona{
+    cedula: string
+    nombres: string
+    apellidos: string
+    genero: string
+    direccion: string
+    telefono: string
+}
+
+class Cliente{}
+class Empleado{}
+
+class CuentaBancaria{
+    numeroCuenta: string
+    fechaApertura: date
+    saldo: number
+    tipoInteres: number
+}
+
+class FondoInversion{
+    nombre: string
+    importe: number
+    rentabilidad: number
+    fechaApertura: date
+    vencimiento: date
+}
+
+class CarteraValor{
+
+}
+class Ahorro{}
+class Corriente{}
+class TarjetaCredito{}
+class Sucursal{}
+
+Persona <|-- Cliente
+Persona <|-- Empleado
+
+@enduml

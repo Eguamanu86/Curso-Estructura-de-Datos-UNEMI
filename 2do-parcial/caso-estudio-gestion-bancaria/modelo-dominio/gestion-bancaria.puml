@@ -38,7 +38,7 @@ class CarteraValor{
 
 }
 
-Class Valor{
+class Valor{
     nombreValor: string
     numeroTitulo: string
     precioCotizacion: number
@@ -76,8 +76,8 @@ Corriente  -- CarteraValor
 Empleado "1" -- "1" Sucursal
 CarteraValor --* Valor
 
-Banco --* CuentaBancaria
-Banco --o Cliente
-Banco --* Empleado
+Banco *-- CuentaBancaria
+Banco o-- Cliente
+Banco *-- Empleado
 
 @enduml

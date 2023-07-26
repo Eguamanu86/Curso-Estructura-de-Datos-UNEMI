@@ -26,7 +26,7 @@ class Sucursal {
 
 
 class Persona {
-  constructor(cedula, nombres, apellidos, genero, ciudad, direccion, telefono) {
+  constructor(cedula, nombres, apellidos, genero, ciudad, direccion, telefono, correo) {
     this.cedula = cedula
     this.nombres = nombres
     this.apellidos = apellidos
@@ -35,19 +35,20 @@ class Persona {
     this.ciudad = ciudad
     this.direccion = direccion
     this.telefono = telefono
+    this.correo = correo
   }
 
 }
 
 class Cliente extends Persona {
-  constructor(cedula, nombres, apellidos, genero, ciudad, direccion, telefono) {
-    super(cedula, nombres, apellidos, genero, ciudad, direccion, telefono)
+  constructor(cedula, nombres, apellidos, genero, ciudad, direccion, telefono, correo) {
+    super(cedula, nombres, apellidos, genero, ciudad, direccion, telefono, correo)
   }
 
 }
 class Empleado extends Persona {
-  constructor(cedula, nombres, apellidos, genero, ciudad, direccion, telefono, sucursal) {
-    super(cedula, nombres, apellidos, genero, ciudad, direccion, telefono)
+  constructor(cedula, nombres, apellidos, genero, ciudad, direccion, telefono, correo, sucursal) {
+    super(cedula, nombres, apellidos, genero, ciudad, direccion, telefono, correo)
     this.sucursal = sucursal
   }
 

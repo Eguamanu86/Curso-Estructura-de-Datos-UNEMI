@@ -22,4 +22,8 @@ export class UsersUseCase {
     return this.usersRepository.getSession()
   }
 
+  setRemoveSession() {
+    this.usersRepository.setRemoveSession()
+  }
+
 }

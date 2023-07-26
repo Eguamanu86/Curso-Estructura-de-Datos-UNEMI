@@ -19,41 +19,41 @@
     </header>
     <main class="container">
         <div class="row py-5">
+            <h3>Gestion de cuentas bancarias</h3>
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Clientes</button>
-                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Empleados</button>
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                        data-bs-target="#tab-cuentas-bancarias" type="button" role="tab" aria-controls="nav-home"
+                        aria-selected="true">Cuentas bancarias</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#tab-clientes"
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Clientes</button>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade show active" id="tab-cuentas-bancarias" role="tabpanel"
+                    aria-labelledby="nav-home-tab">
                     <div class="table-responsive">
                         <div class="card shadow mt-2 p-0">
                             <div class="card-header p-2 h5">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCliente">
-                                    + Nuevo cliente</button>
+                                    + Nueva Cuenta</button>
                             </div>
                             <div class="card-body p-0">
-                                <table class="table table-striped table-hover" id="id-table-clientes">
+                                <table class="table table-striped table-hover" id="id-table-cuentas">
                                     <thead class="bg-secondary text-white">
                                         <tr>
-                                            <th>CI.</th>
+                                            <th>N#.Cuenta</th>
+                                            <th>Tipo</th>
                                             <th>Cliente</th>
-                                            <th>Genero</th>
-                                            <th>Edad</th>
-                                            <th>Telefono</th>
-                                            <th>Fecha Ingreso</th>
-                                            <th>Monto Venta</th>
-                                            <th>Tipo Pago</th>
+                                            <th>F.Apertura</th>
+                                            <th>Saldo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td colspan="9" align="center">
+                                            <td colspan="6" align="center">
                                                 No se ha ingresado registros de cuentas bancarias
                                             </td>
                                         </tr>
@@ -66,41 +66,30 @@
 
                     </div>
                 </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="tab-pane fade show" id="tab-clientes" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="table-responsive">
                         <div class="card shadow mt-2 p-0">
                             <div class="card-header p-2 h5">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#modalEmpleado">
-                                    + Nuevo Empleado</button>
-
-                                <button type="button" class="btn btn-primary" id="id-btn-maximo-sueldo">
-                                    Maximo Sueldo</button>
-
-                                <button type="button" class="btn btn-primary" id="id-btn-maximo-sueldo-por-genero">
-                                    Maximo Sueldo por Genero</button>
+                                    data-bs-target="#modalCliente">
+                                    + Nuevo cliente</button>
                             </div>
                             <div class="card-body p-0">
-                                <table class="table table-striped table-hover" id="id-table-empleados">
+                                <table class="table table-striped table-hover" id="id-table-clientes">
                                     <thead class="bg-secondary text-white">
                                         <tr>
-                                            <th>CI.</th>
-                                            <th>Empleado</th>
+                                            <th>Cedula</th>
+                                            <th>Nombres</th>
                                             <th>Genero</th>
-                                            <th>Edad</th>
-                                            <th>Telefono</th>
-                                            <th>Fecha Ingreso</th>
-                                            <th>Sueldo Base</th>
-                                            <th>Hras.Trab.Mes</th>
-                                            <th>Valor.Hora</th>
-                                            <th>Sueldo Fin-Mes</th>
+                                            <th>telefono</th>
+                                            <th>Ciudad</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td colspan="9" align="center">
-                                                No se ha ingresado registros de Empleados
+                                            <td colspan="3" align="center">
+                                                No se ha ingresado registros de cuentas bancarias
                                             </td>
                                         </tr>
                                     </tbody>
@@ -156,15 +145,6 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Fecha de Nacimiento</label>
-                                    <input type="date" class="form-control" id="id-fecha-nacimiento"
-                                        name="fechaNacimiento" placeholder="" value="" required="">
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Telefono</label>
                                     <input type="text" class="form-control" id="id-telefono" name="telefono"
                                         placeholder="" value="" required="">
@@ -173,7 +153,20 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
+                                    <label for="lastName" class="form-label">Genero</label>
+                                    <select name="genero" id="id-genero" class="form-select" required>
+                                        <option>---</option>
+                                        <option value="MASCULIMO">MASCULIMO</option>
+                                        <option value="FEMENINO">FEMENINO</option>
+                                        <option value="OTROS">OTROS</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Valid last name is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Correo Electronico</label>
                                     <input type="text" class="form-control" id="id-correo" name="correo" placeholder=""
                                         value="" required="">
@@ -182,20 +175,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-4">
-                                    <label for="lastName" class="form-label">Genero</label>
-                                    <select name="genero" id="id-genero" class="form-select" required>
-                                        <option>---</option>
-                                        <option value="M">Masculino</option>
-                                        <option value="F">Femenino</option>
-                                        <option value="O">Otros</option>
-                                    </select>
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Direccion</label>
                                     <input type="text" class="form-control" id="id-direccion" name="direccion"
                                         placeholder="" value="" required="">
@@ -204,43 +184,18 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Fecha de Ingreso</label>
-                                    <input type="date" class="form-control" id="id-fecha-ingreso" name="fechaIngreso"
-                                        placeholder="" value="" required="">
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Tipo Pago</label>
-                                    <select name="tipoPago" id="id-tipo-pago" class="form-select" required>
+                                    <label for="lastName" class="form-label">Ciudad</label>
+                                    <select name="ciudad" id="id-ciudad" class="form-select" required>
                                         <option>---</option>
-                                        <option value="EFECTIVO">EFECTIVO</option>
-                                        <option value="DEBITO">DEBITO</option>
-                                        <option value="CREDITO">CREDITO</option>
-                                        <option value="CHEQUE">CHEQUE</option>
+                                        <option value="MILAGRO">MILAGRO</option>
+                                        <option value="GUAYAQUIL">GUAYAQUIL</option>
+                                        <option value="OTROS">OTROS</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>
                                 </div>
-
-                                <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Monto de venta</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" id="id-monto-venta" name="montoVenta"
-                                            aria-label="Amount (to the nearest dollar)">
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-
                             </div>
 
                         </div>
@@ -387,24 +342,6 @@
         </div>
 
 
-        <!-- modal presentacion-->
-        <div class="modal fade" id="id-modal-respuesta" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalToggleLabel">Respuesta</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="id-modal-body">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
     </main>
     <footer>
@@ -412,6 +349,7 @@
     </footer>
     <script type="module" src="./js/session.js"></script>
     <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/clientes.js"></script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

@@ -29,4 +29,8 @@ export class UsersRepository {
   getSession() {
     return JSON.parse(sessionStorage.getItem('session')) || null
   }
+
+  setRemoveSession() {
+    sessionStorage.removeItem('session')
+  }
 }

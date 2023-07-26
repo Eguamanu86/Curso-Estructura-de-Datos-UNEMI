@@ -9,7 +9,8 @@ formLogin.addEventListener('submit', event => {
   const username = document.getElementById('id-username').value
   const password = document.getElementById('id-password').value
 
-  const user = usersUsecase.login(username, password)
+  const user = usersUsecase.login(username, password) // null/undefined -> objeto User
+  console.log(user)
 
   if (user) {
     usersUsecase.setCreateSession(user)

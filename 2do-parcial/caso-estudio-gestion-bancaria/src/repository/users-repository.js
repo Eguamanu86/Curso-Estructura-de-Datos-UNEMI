@@ -2,7 +2,7 @@ import { User } from '../entity/user.js'
 
 export class UsersRepository {
   constructor() {
-    this.users = JSON.parse(sessionStorage.getItem('users')) || []
+    this.users = JSON.parse(localStorage.getItem('users')) || []
     this.users = this.users.map(
       u => new User(u.username, u.password, u.email, u.nombres, u.status)
     )
@@ -15,7 +15,7 @@ export class UsersRepository {
 
   create(user) {
     this.users.push(user)
-    sessionStorage.setItem('users', JSON.stringify(this.users))
+    localStorage.setItem('users', JSON.stringify(this.users))
   }
 
   getUsers() {
@@ -27,6 +27,6 @@ export class UsersRepository {
   }
 
   getSession() {
-    return JSON.parse(sessionStorage.getItem('session'))
+    return JSON.parse(sessionStorage.getItem('session')) || null
   }
 }

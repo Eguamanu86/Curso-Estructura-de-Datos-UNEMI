@@ -6,3 +6,10 @@ const user = usersUseCase.getSession()
 if (!user) { // si no existe el objeto user
   window.location = 'login.html'
 }
+
+const btnSalir = document.getElementById('id-btn-salir')
+btnSalir.addEventListener('click', event => {
+  event.preventDefault()
+  usersUseCase.setRemoveSession()
+  window.location = 'login.html'
+})

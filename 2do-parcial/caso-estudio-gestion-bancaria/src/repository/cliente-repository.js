@@ -14,14 +14,19 @@ export class ClienteRespository {
         c.telefono
       )
     })
+    // this.clientes = [Cliente(),Cliente().... n]
   }
 
+  //get: retornar valores
   getClientes() {
     return this.clientes
   }
 
-  setCreate(cliente) {
-    this.clientes.push(cliente)
+  // set: asignar valores o crear
+  setCreate(cliente) {             // 0 ,     1  ,     2
+    this.clientes.push(cliente) // [Cliente1,Cliente2,Cliente(end)... n]
+    //                     JSON  [{nombre: "ernesto"}]
+    //                     key    ,  JSON: [{"nombre":"ernesto"},{}]
     localStorage.setItem('clientes', JSON.stringify(this.clientes))
   }
 

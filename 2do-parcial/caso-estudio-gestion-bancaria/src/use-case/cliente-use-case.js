@@ -11,7 +11,11 @@ export class ClienteUseCase {
   }
 
   setCreate(data) {
+    // si no existe numero de cedula registrado continuamos: guardar Cliente
+    // const objeto = this.buscarPorCedula(data.cedula)
+    // si el objeto esta vacio o
     if (!this.buscarPorCedula(data.cedula)) {
+      // creamos la instancia del objeto Cliente
       const cliente = new Cliente(
         data.cedula,
         data.nombres,
@@ -29,8 +33,10 @@ export class ClienteUseCase {
   }
 
   buscarPorCedula(cedula) {
-    const clientes = this.clienteRespository.getClientes()
-    const cliente = clientes.find(c => c.cedula == cedula)
+    const clientes = this.clienteRespository.getClientes() // [CLiente1(),Cliente2() ... n]
+    const cliente = clientes.find(c => c.cedula == cedula) // Cliente() : undefined
+    //const cliente1 = clientes.map(c => c.cedula) // [Cliente1(),Cliente2()] : []
+    ///const cliente2 = clientes.filter(c => c.cedula == cedula)[0] // [Cliente1()]: []
     return cliente
   }
 

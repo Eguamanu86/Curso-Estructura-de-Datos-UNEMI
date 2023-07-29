@@ -1,4 +1,5 @@
 import { UsersUseCase } from '../../src/use-case/users-use-case.js'
+// Creamos la instancia del caso de uso
 const usersUsecase = new UsersUseCase()
 
 const formLogin = document.getElementById('id-form-login')

@@ -36,11 +36,11 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="tab-cuentas-bancarias" role="tabpanel"
                     aria-labelledby="nav-home-tab">
-                    <div class="table-responsive">
+                    <div class="table-responsive vh-100">
                         <div class="card shadow mt-2 p-0">
                             <div class="card-header p-2 h5">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#modalCliente">
+                                    data-bs-target="#modalCuentas">
                                     + Nueva Cuenta</button>
                             </div>
                             <div class="card-body p-0">
@@ -213,89 +213,44 @@
         </div>
 
         <!-- Modal empleados -->
-        <div class="modal fade" id="modalEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel">
+        <div class="modal fade" id="modalCuentas" tabindex="-1" aria-labelledby="exampleModalLabel">
             <div class="modal-dialog modal-lg">
-                <form id="id-form-empleado" class="needs-validation" novalidate="">
+                <form id="id-form-cuenta-bancaria" class="needs-validation" novalidate="">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Registrar nuevo Empleado</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Registrar nueva cuenta bancaria</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
 
                             <div class="row g-2">
                                 <div class="col-sm-6">
-                                    <label for="firstName" class="form-label">C.Identidad</label>
-                                    <input type="text" class="form-control" id="id-cedula" name="cedula" placeholder=""
-                                        value="" required="">
-                                    <div class="invalid-feedback">
-                                        Valid first name is required.
-                                    </div>
-                                </div>
-                                <div class="col-sm-6"></div>
-
-                                <div class="col-sm-6">
-                                    <label for="firstName" class="form-label">Nombres</label>
-                                    <input type="text" class="form-control" id="id-nombres" name="nombres"
-                                        placeholder="" value="" required="">
+                                    <label for="firstName" class="form-label">N# Cuenta</label>
+                                    <input type="text" class="form-control" id="id-numero-cuenta" name="numeroCuenta"
+                                        placeholder="" value="" required="" readonly>
                                     <div class="invalid-feedback">
                                         Valid first name is required.
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Apellidos</label>
-                                    <input type="text" class="form-control" id="id-apellidos" name="apellidos"
-                                        placeholder="" value="" required="">
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Fecha de Nacimiento</label>
-                                    <input type="date" class="form-control" id="id-fecha-nacimiento"
-                                        name="fechaNacimiento" placeholder="" value="" required="">
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Telefono</label>
-                                    <input type="text" class="form-control" id="id-telefono" name="telefono"
-                                        placeholder="" value="" required="">
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-8">
-                                    <label for="lastName" class="form-label">Correo Electronico</label>
-                                    <input type="text" class="form-control" id="id-correo" name="correo" placeholder=""
-                                        value="" required="">
-                                    <div class="invalid-feedback">
-                                        Valid last name is required.
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <label for="lastName" class="form-label">Genero</label>
-                                    <select name="genero" id="id-genero" class="form-select" required>
+                                    <label for="lastName" class="form-label">Tipo de Cuenta</label>
+                                    <select name="tipoCuenta" id="id-tipo-cuenta" class="form-select" required>
                                         <option>---</option>
-                                        <option value="M">Masculino</option>
-                                        <option value="F">Femenino</option>
-                                        <option value="O">Otros</option>
+                                        <option value="AHORRO">AHORRO</option>
+                                        <option value="CORRIENTE">CORRIENTE</option>
                                     </select>
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>
                                 </div>
 
+
                                 <div class="col-sm-12">
-                                    <label for="lastName" class="form-label">Direccion</label>
-                                    <input type="text" class="form-control" id="id-direccion" name="direccion"
-                                        placeholder="" value="" required="">
+                                    <label for="lastName" class="form-label">Cliente</label>
+                                    <select name="cedula" id="id-cliente" class="form-select" required>
+                                        <option>---</option>
+                                    </select>
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>
@@ -303,34 +258,39 @@
 
 
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Fecha de Ingreso</label>
-                                    <input type="date" class="form-control" id="id-fecha-ingreso" name="fechaIngreso"
+                                    <label for="lastName" class="form-label">Fecha de Apertura</label>
+                                    <input type="date" class="form-control" id="id-fecha-apertura" name="fechaApertura"
                                         placeholder="" value="" required="">
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>
                                 </div>
 
+
+
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Sueldo base</label>
-                                    <input type="number" class="form-control" id="id-sueldo-base" name="sueldoBase"
+                                    <label for="lastName" class="form-label">Saldo</label>
+                                    <input type="number" class="form-control" id="id-saldo" name="saldo"
                                         aria-label="Amount (to the nearest dollar)">
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>
                                 </div>
 
+
                                 <div class="col-sm-6">
-                                    <label for="lastName" class="form-label">Horas Trabajadas del Mes</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" id="id-horas-trabajadas-mes"
-                                            name="horasTrabajadasMes" aria-label="Amount (to the nearest dollar)">
-                                    </div>
+                                    <label for="lastName" class="form-label">Tipo de Interes</label>
+                                    <select name="tipoInteres" id="id-tipo-interes" class="form-select" required>
+                                        <option>---</option>
+                                        <option value="SIMPLE">SIMPLE</option>
+                                        <option value="COMPUESTO">COMPUESTO</option>
+                                        <option value="OTROS">OTROS</option>
+                                    </select>
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>
                                 </div>
+
 
 
                             </div>

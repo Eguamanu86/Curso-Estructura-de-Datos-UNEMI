@@ -25,6 +25,7 @@ export class CuentaBancariaUseCase {
       case 'AHORRO':
         cuenta = new Ahorro(
           numeroCuenta,
+          data.tipoCuenta,
           cliente,
           data.fechaApertura,
           data.saldo,
@@ -36,6 +37,7 @@ export class CuentaBancariaUseCase {
       case 'CORRIENTE':
         cuenta = new Corriente(
           numeroCuenta,
+          data.tipoCuenta,
           cliente,
           data.fechaApertura,
           data.saldo,
@@ -44,6 +46,7 @@ export class CuentaBancariaUseCase {
         break
 
     }
+    // Guardamos en objeto cuenta bancaria en la Lista de datos
     this.cuentaBancariaRepository.setCreateCuentaBancaria(cuenta)
     return cuenta
   }

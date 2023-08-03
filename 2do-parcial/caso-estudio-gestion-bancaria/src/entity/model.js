@@ -55,8 +55,9 @@ class Empleado extends Persona {
 }
 
 class CuentaBancaria {
-  constructor(numeroCuenta, cliente, fechaApertura, saldo, tipoInteres) {
+  constructor(numeroCuenta, tipoCuenta, cliente, fechaApertura, saldo, tipoInteres) {
     this.numeroCuenta = numeroCuenta
+    this.tipoCuenta = tipoCuenta
     this.cliente = cliente
     this.fechaApertura = new Date(fechaApertura)
     this.saldo = Number(saldo)
@@ -90,14 +91,14 @@ class Valor {
 }
 
 class Ahorro extends CuentaBancaria {
-  constructor(numeroCuenta, cliente, fechaApertura, saldo, tipoInteres) {
-    super(numeroCuenta, cliente, fechaApertura, saldo, tipoInteres)
+  constructor(numeroCuenta, tipoCuenta, cliente, fechaApertura, saldo, tipoInteres) {
+    super(numeroCuenta, tipoCuenta, cliente, fechaApertura, saldo, tipoInteres)
   }
 }
 
 class Corriente extends CuentaBancaria {
-  constructor(numeroCuenta, cliente, fechaApertura, saldo, tipoInteres) {
-    super(numeroCuenta, cliente, fechaApertura, saldo, tipoInteres)
+  constructor(numeroCuenta, tipoCuenta, cliente, fechaApertura, saldo, tipoInteres) {
+    super(numeroCuenta, tipoCuenta, cliente, fechaApertura, saldo, tipoInteres)
   }
 }
 
